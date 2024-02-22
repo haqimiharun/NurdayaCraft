@@ -1,0 +1,69 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body {
+    max-width: 100%;
+    height: 100vh;
+}
+
+.navbar{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 30px;
+    background-color: #FCD5CE;
+}
+
+.navbar a {
+    text-decoration: none;
+    color: #000;
+    font-family: 'Sura', serif;
+    font-size: 17px;
+}
+
+.searchNav{
+    
+}
+
+.searchNav input[type=text]{
+    padding: 8px;
+    margin-top: 7px;
+    font-size: 17px;
+    border: #868686;
+    color: #868686;
+    border-radius: 12px;
+}
+
+.searchNav button{
+    padding: 8px;
+    margin-top: 7px;
+    margin-right: 16px;
+    background: white;
+    font-size: 17px;
+    border: none;
+    cursor: pointer;
+    border-radius: 12px;
+}
+
+.registerButton{
+    margin-left: 20px;
+    padding: 8px 20px;
+    font-size: 17px;
+    background-color: #2577FD;
+    color: #fff;
+    border: none;
+    border-radius: 12px;
+}
+
+.dropDown{
+    overflow: hidden;
+    font-family: 'Sura', serif;
+    font-size: 17px;
+    background: none;
+    border: none;
+    background-color: #FCD5CE;
+}
