@@ -1,0 +1,41 @@
+# Environment files
+.env
+
+# IDE files
+.vs/
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+logs/
+
+# Dependencies (if using composer)
+/vendor/
+
+# Uploads (optional - uncomment if you don't want to track uploads)
+# /uploads/products/*
+# !/uploads/products/.gitkeep
+
+# Cache
+/cache/
+*.cache
+
+# Temporary files
+/tmp/
+*.tmp
+*.bak
+*.swp
+
+# Old/backup folders
+/NurdayaCraft/
+
+# Compiled files
+*.min.css
+*.min.js

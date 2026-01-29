@@ -1,0 +1,616 @@
+/**
+ * Nurdaya Store - Main Stylesheet
+ * Professional CSS organization
+ */
+
+/* ========================================
+   1. IMPORTS & FONTS
+   ======================================== */
+@import url('https://fonts.googleapis.com/css2?family=Jost&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Sulphur+Point&display=swap');
+
+/* ========================================
+   2. CSS VARIABLES
+   ======================================== */
+:root {
+    --color-primary: #FCD5CE;
+    --color-secondary: #B67B81;
+    --color-accent: #C50808;
+    --color-background: #F3ECEB;
+    --color-text: #4D4D4D;
+    --color-text-light: #868686;
+    --color-border: #AEAEAE;
+    --color-input-bg: #C9C9C9;
+    --font-primary: 'Jost', sans-serif;
+    --font-brand: 'Sulphur Point', sans-serif;
+    --border-radius: 12px;
+    --border-radius-sm: 4px;
+    --transition: all 0.3s ease;
+}
+
+/* ========================================
+   3. BASE STYLES
+   ======================================== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: var(--font-primary);
+    color: var(--color-text);
+    line-height: 1.6;
+    background-color: #fff;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+    transition: var(--transition);
+}
+
+a:hover {
+    opacity: 0.8;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+/* ========================================
+   4. NAVBAR
+   ======================================== */
+.navbar {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 30px;
+    background-color: var(--color-primary);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.navbar-brand {
+    font-family: var(--font-brand);
+    font-size: 32px;
+    color: var(--color-text);
+    font-weight: bold;
+}
+
+.navbar-nav {
+    display: flex;
+    gap: 20px;
+    list-style: none;
+}
+
+.navbar-nav a {
+    font-size: 17px;
+    padding: 8px 12px;
+    border-radius: var(--border-radius-sm);
+}
+
+.navbar-nav a:hover {
+    background-color: rgba(255, 255, 255, 0.3);
+}
+
+/* Search in Navbar */
+.search-nav {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.search-nav input[type="text"] {
+    padding: 8px 16px;
+    font-size: 16px;
+    border: 1px solid var(--color-text-light);
+    border-radius: var(--border-radius);
+    outline: none;
+    transition: var(--transition);
+}
+
+.search-nav input[type="text"]:focus {
+    border-color: var(--color-secondary);
+}
+
+.search-nav button {
+    padding: 8px 12px;
+    background: white;
+    border: none;
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.search-nav button:hover {
+    background-color: var(--color-background);
+}
+
+/* Navbar Actions */
+.navbar-actions {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.navbar-actions img {
+    width: 25px;
+    height: 25px;
+}
+
+/* ========================================
+   5. BUTTONS
+   ======================================== */
+.btn {
+    display: inline-block;
+    padding: 10px 24px;
+    font-size: 16px;
+    font-weight: 500;
+    text-align: center;
+    border: none;
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.btn-primary {
+    background-color: #0d6efd;
+    color: white;
+}
+
+.btn-primary:hover {
+    background-color: #0b5ed7;
+}
+
+.btn-secondary {
+    background-color: #6c757d;
+    color: white;
+}
+
+.btn-secondary:hover {
+    background-color: #5c636a;
+}
+
+.btn-outline {
+    background-color: transparent;
+    border: 2px solid var(--color-text);
+    color: var(--color-text);
+}
+
+.btn-outline:hover {
+    background-color: var(--color-text);
+    color: white;
+}
+
+.register-btn {
+    margin-left: 20px;
+    padding: 8px 20px;
+    font-size: 17px;
+    border-radius: var(--border-radius);
+}
+
+.subscribe-btn {
+    background-color: var(--color-secondary);
+    border: none;
+    color: white;
+}
+
+.subscribe-btn:hover {
+    background-color: #9d6a70;
+}
+
+/* ========================================
+   6. FORMS
+   ======================================== */
+.form-control {
+    width: 100%;
+    padding: 10px 15px;
+    font-size: 16px;
+    border: 1px solid var(--color-border);
+    border-radius: 0;
+    outline: none;
+    transition: var(--transition);
+}
+
+.form-control:focus {
+    border-color: var(--color-secondary);
+    box-shadow: 0 0 0 3px rgba(182, 123, 129, 0.2);
+}
+
+.subscribe-input {
+    border: none;
+    background-color: var(--color-input-bg);
+}
+
+.subscribe-border {
+    border-bottom-left-radius: 12px;
+    border-bottom-right-radius: 2px;
+    border-top-left-radius: 2px;
+    border-top-right-radius: 12px;
+}
+
+/* ========================================
+   7. PRODUCT CARDS
+   ======================================== */
+.product-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 15px;
+    border: 1px solid var(--color-border);
+    border-radius: 25px;
+    background: white;
+    transition: var(--transition);
+}
+
+.product-container:hover {
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+    transform: translateY(-5px);
+}
+
+.product-container img {
+    border-radius: 10px;
+    object-fit: cover;
+}
+
+.product-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 10px 0;
+}
+
+.product-name {
+    font-weight: 500;
+    margin-bottom: 5px;
+}
+
+.product-price {
+    color: var(--color-secondary);
+    font-weight: 600;
+}
+
+/* ========================================
+   8. HERO SECTION
+   ======================================== */
+.hero-section {
+    background-color: var(--color-background);
+    padding: 60px 0;
+}
+
+.hero-discount {
+    font-size: 48px;
+    color: var(--color-accent);
+}
+
+.hero-title {
+    font-size: 72px;
+    line-height: 1.1;
+    margin-bottom: 20px;
+}
+
+.hero-subtitle {
+    font-size: 24px;
+    color: var(--color-text-light);
+    margin-bottom: 30px;
+}
+
+/* ========================================
+   9. SECTIONS
+   ======================================== */
+.section {
+    padding: 60px 0;
+}
+
+.section-title {
+    text-align: center;
+    font-size: 36px;
+    margin-bottom: 40px;
+}
+
+.products-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    padding: 0 50px;
+}
+
+.products-grid .product-container {
+    flex-basis: calc(25% - 15px);
+}
+
+@media (max-width: 992px) {
+    .products-grid .product-container {
+        flex-basis: calc(33.333% - 15px);
+    }
+}
+
+@media (max-width: 768px) {
+    .products-grid .product-container {
+        flex-basis: calc(50% - 10px);
+    }
+}
+
+@media (max-width: 480px) {
+    .products-grid .product-container {
+        flex-basis: 100%;
+    }
+}
+
+/* ========================================
+   10. FOOTER
+   ======================================== */
+.site-footer {
+    background-color: var(--color-background);
+    padding-top: 0;
+}
+
+.social-bar {
+    background-color: var(--color-primary);
+    padding: 15px;
+    text-align: center;
+}
+
+.social-bar a {
+    margin: 0 10px;
+}
+
+.footer-content {
+    padding: 30px 0;
+}
+
+.footer-brand {
+    color: var(--color-accent);
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.footer-tagline {
+    color: var(--color-text-light);
+}
+
+.footer-links h4 {
+    margin-bottom: 15px;
+}
+
+.footer-links a {
+    display: block;
+    margin-bottom: 8px;
+    color: var(--color-text-light);
+}
+
+.footer-links a:hover {
+    color: var(--color-text);
+}
+
+/* ========================================
+   11. UTILITIES
+   ======================================== */
+.bg-main {
+    background-color: var(--color-primary);
+}
+
+.bg-lighter {
+    background-color: var(--color-background);
+}
+
+.text-accent {
+    color: var(--color-accent);
+}
+
+.text-center {
+    text-align: center;
+}
+
+.mt-3 { margin-top: 1rem; }
+.mt-5 { margin-top: 3rem; }
+.mb-3 { margin-bottom: 1rem; }
+.mb-5 { margin-bottom: 3rem; }
+.py-3 { padding-top: 1rem; padding-bottom: 1rem; }
+.py-5 { padding-top: 3rem; padding-bottom: 3rem; }
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 15px;
+}
+
+/* ========================================
+   12. USER DROPDOWN
+   ======================================== */
+.user-dropdown {
+    position: relative;
+}
+
+.user-dropdown .dropdown-toggle {
+    background: none;
+    border: 1px solid var(--color-text);
+    padding: 8px 16px;
+    border-radius: var(--border-radius);
+    cursor: pointer;
+}
+
+.user-dropdown .dropdown-menu {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background: white;
+    border: 1px solid var(--color-border);
+    border-radius: var(--border-radius-sm);
+    min-width: 150px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    display: none;
+}
+
+.user-dropdown:hover .dropdown-menu {
+    display: block;
+}
+
+.user-dropdown .dropdown-menu a {
+    display: block;
+    padding: 10px 15px;
+}
+
+.user-dropdown .dropdown-menu a:hover {
+    background-color: var(--color-background);
+}
+
+/* ========================================
+   13. ALERTS
+   ======================================== */
+.alert {
+    padding: 15px 20px;
+    border-radius: var(--border-radius-sm);
+    margin-bottom: 20px;
+}
+
+.alert-success {
+    background-color: #d4edda;
+    border: 1px solid #c3e6cb;
+    color: #155724;
+}
+
+.alert-danger {
+    background-color: #f8d7da;
+    border: 1px solid #f5c6cb;
+    color: #721c24;
+}
+
+.alert-warning {
+    background-color: #fff3cd;
+    border: 1px solid #ffeeba;
+    color: #856404;
+}
+
+/* ========================================
+   14. TABLES (Admin)
+   ======================================== */
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+.table th,
+.table td {
+    padding: 12px 15px;
+    text-align: left;
+    border-bottom: 1px solid var(--color-border);
+}
+
+.table th {
+    background-color: var(--color-primary);
+    font-weight: 600;
+}
+
+.table tbody tr:hover {
+    background-color: var(--color-background);
+}
+
+/* ========================================
+   15. MODALS
+   ======================================== */
+.modal-backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 2000;
+}
+
+.modal-backdrop.active {
+    display: flex;
+}
+
+.modal-content {
+    background: white;
+    padding: 30px;
+    border-radius: var(--border-radius);
+    max-width: 500px;
+    width: 90%;
+    max-height: 80vh;
+    overflow-y: auto;
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.modal-close {
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+}
+
+/* ========================================
+   16. ADMIN SIDEBAR
+   ======================================== */
+.admin-layout {
+    display: flex;
+    min-height: 100vh;
+}
+
+.admin-sidebar {
+    width: 250px;
+    background-color: var(--color-primary);
+    padding: 20px;
+}
+
+.admin-sidebar .nav-link {
+    display: block;
+    padding: 12px 15px;
+    margin-bottom: 5px;
+    border-radius: var(--border-radius-sm);
+    color: var(--color-text);
+}
+
+.admin-sidebar .nav-link:hover,
+.admin-sidebar .nav-link.active {
+    background-color: rgba(255, 255, 255, 0.5);
+}
+
+.admin-content {
+    flex: 1;
+    padding: 30px;
+}
+
+/* ========================================
+   17. RESPONSIVE
+   ======================================== */
+@media (max-width: 768px) {
+    .navbar {
+        flex-wrap: wrap;
+        gap: 15px;
+    }
+
+    .hero-title {
+        font-size: 48px;
+    }
+
+    .hero-discount {
+        font-size: 32px;
+    }
+
+    .admin-layout {
+        flex-direction: column;
+    }
+
+    .admin-sidebar {
+        width: 100%;
+    }
+}
