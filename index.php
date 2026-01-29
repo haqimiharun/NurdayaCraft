@@ -1,204 +1,217 @@
 <?php
-include 'applications/mainframe.php';
-session_start();
-?>
-<!DOCTYPE html>
-<html>
-    <head>
-        <title>Nurdaya Store</title>
-    <script language="javascript" src="index.js"></script>
-        <style>
+/**
+ * Nurdaya Store - Main Entry Point (Router)
+ *
+ * This is the single entry point for the application.
+ * All requests are routed through this file.
+ */
 
-            .navbar{
-                width: 100%;
-                display: flex;
-                justify-content: space-between;
-                align-items: center;
-                padding: 15px 30px;
-                background-color: #FCD5CE;
-            }
+// Load configuration
+require_once __DIR__ . '/config/config.php';
+require_once __DIR__ . '/core/helpers.php';
+require_once __DIR__ . '/core/Session.php';
 
-            .navbar a {
-                text-decoration: none;
-                color: #000;
-                font-family: 'Sura', serif;
-                font-size: 17px;
-            }
+// Start session
+Session::start();
 
-            .searchNav input[type=text]{
-                padding: 8px;
-                margin-top: 7px;
-                font-size: 17px;
-                border: #868686;
-                color: #868686;
-                border-radius: 12px;
-            }
+// Get requested page and action
+$page = $_GET['page'] ?? 'home';
+$action = $_GET['action'] ?? 'index';
 
-            .searchNav button{
-                padding: 8px;
-                margin-top: 7px;
-                margin-right: 16px;
-                background: white;
-                font-size: 17px;
-                border: none;
-                cursor: pointer;
-                border-radius: 12px;
-            }
+// Route the request
+switch ($page) {
+    // ============================================
+    // PUBLIC PAGES
+    // ============================================
 
-            .registerButton{
-                margin-left: 20px;
-                padding: 8px 20px;
-                font-size: 17px;
-                border-radius: 12px;
-            }
-        </style>
-    </head>
-    <body>
-        <main>
-            <div class="navbar"> 
-            <a href="index.php" style="font-family: 'Sulphur Point', sans-serif; text-decoration: none; color: #4D4D4D; font-size:32 ;">NurDaya Store</a>
-            <div class="NavBarOption">
-                <a href="#" style="margin-right: 10px;">Home</a>
-                <a href="#" style="margin-right: 10px;">Categories</a>
-                <a href="#" style="margin-right: 10px;">Latest</a>
-                <a href="#" style="margin-right: 10px;">Blog</a>
-                <a href="#" style="margin-right: 10px;">Pages</a>
-                <a href="#">Contact</a>
+    case 'home':
+    case '':
+        require_once CONTROLLERS_PATH . '/HomeController.php';
+        $controller = new HomeController();
+        $controller->index();
+        break;
+
+    case 'showcase':
+        require_once CONTROLLERS_PATH . '/HomeController.php';
+        $controller = new HomeController();
+        $controller->showcase();
+        break;
+
+    case 'search':
+        require_once CONTROLLERS_PATH . '/HomeController.php';
+        $controller = new HomeController();
+        $controller->search();
+        break;
+
+    // ============================================
+    // AUTHENTICATION
+    // ============================================
+
+    case 'login':
+        require_once CONTROLLERS_PATH . '/AuthController.php';
+        $controller = new AuthController();
+        if ($action === 'process') {
+            $controller->processLogin();
+        } else {
+            $controller->login();
+        }
+        break;
+
+    case 'register':
+        require_once CONTROLLERS_PATH . '/AuthController.php';
+        $controller = new AuthController();
+        if ($action === 'process') {
+            $controller->processRegister();
+        } else {
+            $controller->register();
+        }
+        break;
+
+    case 'logout':
+        require_once CONTROLLERS_PATH . '/AuthController.php';
+        $controller = new AuthController();
+        $controller->logout();
+        break;
+
+    // ============================================
+    // ORDERS & CHECKOUT
+    // ============================================
+
+    case 'checkout':
+        require_once CONTROLLERS_PATH . '/OrderController.php';
+        $controller = new OrderController();
+        if ($action === 'process') {
+            $controller->processCheckout();
+        } else {
+            $controller->checkout();
+        }
+        break;
+
+    case 'confirmation':
+        require_once CONTROLLERS_PATH . '/OrderController.php';
+        $controller = new OrderController();
+        $controller->confirmation();
+        break;
+
+    case 'my-orders':
+        require_once CONTROLLERS_PATH . '/OrderController.php';
+        $controller = new OrderController();
+        $controller->myOrders();
+        break;
+
+    // ============================================
+    // ADMIN - DASHBOARD
+    // ============================================
+
+    case 'dashboard':
+        require_once CONTROLLERS_PATH . '/DashboardController.php';
+        $controller = new DashboardController();
+        $controller->index();
+        break;
+
+    // ============================================
+    // ADMIN - PRODUCTS
+    // ============================================
+
+    case 'products':
+        require_once CONTROLLERS_PATH . '/ProductController.php';
+        $controller = new ProductController();
+
+        switch ($action) {
+            case 'store':
+                $controller->store();
+                break;
+            case 'update':
+                $controller->update();
+                break;
+            case 'delete':
+                $controller->delete();
+                break;
+            case 'getEditData':
+                $controller->getEditData();
+                break;
+            case 'getImage':
+                $controller->getImage();
+                break;
+            case 'deleteImage':
+                $controller->deleteImage();
+                break;
+            case 'updateImage':
+                $controller->updateImage();
+                break;
+            case 'checkExist':
+                $controller->checkExist();
+                break;
+            default:
+                $controller->index();
+        }
+        break;
+
+    // ============================================
+    // ADMIN - CATEGORIES
+    // ============================================
+
+    case 'categories':
+        require_once CONTROLLERS_PATH . '/CategoryController.php';
+        $controller = new CategoryController();
+
+        switch ($action) {
+            case 'store':
+                $controller->store();
+                break;
+            case 'update':
+                $controller->update();
+                break;
+            case 'delete':
+                $controller->delete();
+                break;
+            case 'getEditData':
+                $controller->getEditData();
+                break;
+            default:
+                $controller->index();
+        }
+        break;
+
+    // ============================================
+    // ADMIN - ORDERS
+    // ============================================
+
+    case 'orders':
+        require_once CONTROLLERS_PATH . '/OrderController.php';
+        $controller = new OrderController();
+
+        switch ($action) {
+            case 'updateStatus':
+                $controller->updateStatus();
+                break;
+            case 'getDetails':
+                $controller->getDetails();
+                break;
+            default:
+                $controller->index();
+        }
+        break;
+
+    // ============================================
+    // 404 - PAGE NOT FOUND
+    // ============================================
+
+    default:
+        http_response_code(404);
+        echo '<!DOCTYPE html>
+        <html>
+        <head>
+            <title>404 - Page Not Found</title>
+            <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet">
+        </head>
+        <body class="bg-light">
+            <div class="container text-center py-5">
+                <h1 class="display-1">404</h1>
+                <p class="lead">Page Not Found</p>
+                <a href="' . APP_URL . '" class="btn btn-primary">Go Home</a>
             </div>
-            <div class="searchNav">
-                <div class="row">
-                    <div class="col"><input type="text" placeholder="Search" name="search" class="form-control shadow-none" autocomplete="off"></div>
-                    <div class="col"><button type="button" class=""><img src="images/search.png"></button></div>
-                </div>
-            </div>
-            <div>
-                <a href="#"><img src="images/bookmark.png" width="25px"></a>
-                <a href="#"><img src="images/cart.png" width="25px"></a>
-                
-                <?php
-                    if (!isset($_SESSION['user_id'])) {
-                ?>
-                <a href="sites/login/login.php"><button type="submit" class="btn btn-primary registerButton">Sign In</button></a>
-                <?php
-                    }else{
-
-                ?>
-                <select class="dropDown btn" id="dropDown">
-                    <option value="name"><?php echo $_SESSION['user_name']?></option>
-                    <option value="signin">My Order</option>
-                    <option value="logout"><button type="" id="logout">Logout</button></option>
-                </select>
-                <?php
-                    }
-                ?>
-            </div>
-            </div>
-
-            <div class="row bg-lighter pt-5">
-                <div class="col-md-6">
-                    <img src="images/mainproduct.png" class="img-fluid">
-                </div>
-                <div class="col-md-6">
-                    <div class="row" style="font-size: 48px;">40% Discount</div>
-                    <div class="row" style="font-size: 128px;">New Year Collection</div>
-                    <div class="row" style="font-size: 32px;">Art is never finished, only abandoned</div>
-                    <div class="row"><a type="button" class="btn btn-primary w-25" style="border-radius: 42px" href="#product">Shop Now</a></div>
-                </div>
-            </div>
-            <?php
-                $catQuery = "SELECT * FROM category a WHERE EXISTS (SELECT category_id FROM product b WHERE b.product_status='Y' AND a.category_id=b.category_id) AND a.category_status='Y'";
-                $result2 = mysqli_query($conn, $catQuery);
-                if(mysqli_num_rows($result2)>0){
-                    while($rows2=mysqli_fetch_assoc($result2)){
-                        ?>
-            <section id="product">
-            <div class="container">
-                <div class="row text-center"><h1><?php echo $rows2["category_name"]?></h1></div>
-            </div>
-            </section>
-            <div style="width: 100%; display: flex; flex-wrap: wrap; padding: 0 50px 0 50px">
-            <?php
-            $query ="SELECT product_id, product_image, product_name, product_price FROM product WHERE product_status='Y' AND category_id={$rows2['category_id']}";
-            $result = mysqli_query($conn,$query);
-            if(mysqli_num_rows($result)>0){
-                while($rows=mysqli_fetch_assoc($result)){
-?>
-                
-                    <div class="product-container" style="flex-basis: 25%;">
-                    <?php
-                        if ($rows["product_image"]!=''){
-                    ?>
-                        <a href="sites/showcase/index.php?product=<?php echo $rows["product_id"]?>"><img src="sites/product/uploads/<?php echo $rows["product_image"] ?>" height="250px" style="border-radius: 10px;"></a>
-
-                        <?php
-
-                        }else{
-                            ?>
-                        <a href="sites/showcase/index.php?product=<?php echo $rows["product_id"]?>"><img src="images/image-not-found-icon.png" height="250px" style="border-radius: 10px;"></a>
-                        <?php
-                        }
-                        ?>
-                        <div class="col" style="display: flex; flex-direction: column; justify-content: center; align-items: center; height: 60%;">
-                            <p style="margin-top: 10px;"><?php echo $rows["product_name"]?></p>
-                            <p>RM <?php echo $rows["product_price"] ?></p>
-                        </div>
-                    </div>
-                
-                <?php
-                }
-            }
-            
-            //echo count(mysqli_fetch_assoc($result));
-
-            ?>
-            
-            
-            </div>
-                        <?php
-                    }
-                }
-            ?>
-            
-            
-            <div class="row" style="height: 300px;"></div>
-            
-        </main>
-        <footer class="site-footer bg-lighter" style="height: 300px;">
-        <div class="jumbotron py-3 jumbotron-fluid bg-main text-center">
-            Follow Us: 
-            <a href="https://www.facebook.com/Zadagiftshop"><img src="images/fbicon.png"></a>
-            <a href="https://www.instagram.com/nurdayacraft/"><img src="images/igicon.png"></a>
-        </div>
-            <div class="container pt-3">
-            <div class="row">
-                <div class="col">
-                    <div class="row pt-2">Connect with US</div>
-                    <div class="row pt-2">Subscribe to our newsletter</div>
-                    <div class="row pt-2">Email Address<input type="text" class="subscribe-border subscribe-input form-control shadow-none"></div>
-                    <div class="row pt-2"><button type="button" class="btn subscribe-border subscribe-btn w-25">Subscribe</button></div>
-                </div>
-                <div class="col">
-                    <div class="row pt-2">
-                        <div class="center-block text-center" style="color: #C50808;">
-                            NurDayah Store
-                        </div>
-                    </div>
-                    <div class="row pt-2">
-                        <div class="center-block text-center">
-                            Malaysian Crafter CLIPART & VECTOR ARTWORK
-                        </div>
-                    </div>
-                </div>
-                <div class="col">
-                    <div class="row pt-3">Customer Care</div>
-                    <div class="row">Contact Us</div>
-                    <div class="row">Return Policy</div>
-                    <div class="row">Order Tracking</div>
-                    <div class="row">Find Us</div>
-                </div>
-            </div>
-            </div>
-           
-        </footer>
-    </body>
-</html>
+        </body>
+        </html>';
+        break;
+}
